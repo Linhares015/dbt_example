@@ -1,0 +1,69 @@
+# Nome e versão do projeto
+name: meu_projeto_dbt
+version: 1.0
+config-version: 2
+
+# Definição do perfil que conecta ao data warehouse
+profile: meu_perfil
+
+# Caminhos de pastas onde o DBT encontrará os modelos, macros e seeds
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+# Caminho onde os artefatos de execução são armazenados
+target-path: "target"
+# Diretórios limpos com o comando dbt clean
+clean-targets:
+  - "target"
+  - "dbt_modules"
+
+# Configuração de logs
+log-path: "logs"
+log-format: json
+
+# Configurações de modelos
+models:
+  meu_projeto_dbt:
+    # Configuração global de materialização
+    materialized: view
+    # Configuração para threads (paralelismo)
+    +threads: 4
+    # Persistência de documentação
+    +persist_docs:
+      relation: true
+      columns: true
+    # Configuração de schema e materialização para diretórios específicos
+    staging:
+      schema: staging
+      materialized: table
+      +tags: ['staging']
+    marts:
+      schema: marts
+      materialized: incremental
+      +threads: 2
+      sap:
+        materialized: table
+        schema: custom_schema
+        tags: ['etl']
+
+# Configurações de seeds (dados estáticos)
+seeds:
+  meu_projeto_dbt:
+    schema: seeds
+    quote_columns: true
+
+# Configurações de testes para garantir a qualidade dos dados
+tests:
+  default:
+    unique: true
+    not_null: true
+
+# Pacotes externos
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 0.7.0
+
+# Debugging
+debug: true
