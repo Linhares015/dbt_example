@@ -11,7 +11,7 @@ sources:
         description: "Tabela com os pedidos da empresa"
         columns:
           - name: order_id
-            tests:
+            data_tests:
               - unique
               - not_null
           - name: customer_id
