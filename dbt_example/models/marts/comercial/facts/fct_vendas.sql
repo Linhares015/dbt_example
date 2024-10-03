@@ -1,6 +1,7 @@
 {{ 
     config(
-        tags=['comercial']
+        tags=['comercial'],
+        docs={'node_color': 'red'}
     ) 
 }}
 
