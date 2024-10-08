@@ -36,3 +36,7 @@ seeds:
     +schema: seeds
     tags: ['seeds']
     
+snapshots:
+  dbt_example:
+    tags: ['snapshots']
+    schema: snapshots
