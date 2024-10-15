@@ -15,6 +15,14 @@ clean-targets:
   - "target"
   - "dbt_packages"
 
+# exemple de variables
+
+vars:
+  ambiente: 'desenvolvimento'
+  data_minima: '2023-01-01'
+  schema_nome: 'desenvolvimento_schema'
+
+
 models:
   dbt_example:
     staging:
