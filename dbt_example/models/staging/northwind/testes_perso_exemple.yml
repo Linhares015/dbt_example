@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: clientes
+    columns:
+      - name: email
+        tests:
+          - valid_email
+
+  - name: clientes
+    columns:
+      - name: id_cliente
+        tests:
+          - has_sales

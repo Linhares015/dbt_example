@@ -1,0 +1,42 @@
+version: 2
+
+sources:
+  - name: raw_data_warehouse
+    database: raw
+    schema: public
+    description: "Dados brutos extraídos do sistema transacional"
+    loader: emr
+    loaded_at_field: _loaded_at
+    meta:
+      contains_pii: true
+      owner: "@team_data"
+    tags: [ecom, raw]
+    freshness:
+      warn_after:
+        count: 2
+        period: hour
+      error_after:
+        count: 4
+        period: hour
+    quoting:
+      database: false
+      schema: false
+      identifier: true
+    tables:
+      - name: orders
+        identifier: Orders_Raw
+        description: "Tabela contendo dados brutos de pedidos"
+        loaded_at_field: updated_at
+        columns:
+          - name: id
+            description: "Identificador único do pedido"
+            tests:
+              - unique
+              - not_null
+          - name: customer_id
+            description: "Identificador do cliente"
+            tests:
+              - not_null
+              - relationships:
+                  to: ref('customers')
+                  field: id
