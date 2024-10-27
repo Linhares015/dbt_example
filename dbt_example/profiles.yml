@@ -4,7 +4,7 @@ dbt_example:
     dev:
       type: bigquery
       method: service-account
-      project: athena-421420
+      project:
       dataset: "{{ env_var('DBT_DBNAME', 'dbt_dw') }}"
       threads: 4
-      keyfile: /home/linhares/.dbt/athena-421420-b3782b099826.json
+      keyfile:
